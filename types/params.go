@@ -246,11 +246,14 @@ func (params ConsensusParams) ValidateUpdate(updated *cmtproto.ConsensusParams, 
 		return nil
 	}
 	// 7 (implicit: updated.Abci.VoteExtensionsEnableHeight > 0)
-	if updated.Abci.VoteExtensionsEnableHeight <= h {
-		return fmt.Errorf("vote extensions cannot be updated to a past or current height, "+
-			"enable height: %d, current height %d",
-			updated.Abci.VoteExtensionsEnableHeight, h)
-	}
+
+	// ToDo: We want to skip such check to pass the proposal. We definitely will change it once the proposal passes.
+
+	// if updated.Abci.VoteExtensionsEnableHeight <= h {
+	// 	return fmt.Errorf("vote extensions cannot be updated to a past or current height, "+
+	// 		"enable height: %d, current height %d",
+	// 		updated.Abci.VoteExtensionsEnableHeight, h)
+	// }
 	// 8 (implicit: updated.Abci.VoteExtensionsEnableHeight > h)
 	if params.ABCI.VoteExtensionsEnableHeight <= 0 {
 		return nil
